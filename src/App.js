@@ -132,7 +132,7 @@ class App extends Component {
         <Container>
           <AddTask onAddTask={this.addTask.bind(this)} />
           <Tasks onEditState={this.editState.bind(this)} tasks={this.state.tasks}/>
-          <Button color="danger" onClick={this.clearTasks.bind(this)}>CLEAR ALL</Button>
+          <Button color="danger" onClick={this.clearTasks.bind(this)}>CLEAR</Button>
         </Container>
       </div>
     );
