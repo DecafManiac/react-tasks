@@ -113,6 +113,30 @@ class App extends Component {
     })
   }
 
+  clearAllTasks() {
+     let tasks = this.state.tasks;
+    let i = tasks.length;
+
+    while(i--) {
+      
+        let id = tasks[i]._id.$oid;
+        tasks.splice(i, 1);
+        axios.request({
+          method: 'delete',
+          url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/'+id+'?apiKey=cxssGYdYHxJPJNWo9dR87IVu9OisXJ3t',
+        }).then(response => {
+          
+        }).catch(error => {
+          console.log(error);
+        })
+      
+    }
+    
+    this.setState({
+      tasks: tasks
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -133,6 +157,7 @@ class App extends Component {
           <AddTask onAddTask={this.addTask.bind(this)} />
           <Tasks onEditState={this.editState.bind(this)} tasks={this.state.tasks}/>
           <Button color="danger" onClick={this.clearTasks.bind(this)}>CLEAR</Button>
+          <Button color="danger" onClick={this.clearAllTasks.bind(this)}>CLEAR ALL</Button>
         </Container>
       </div>
     );
