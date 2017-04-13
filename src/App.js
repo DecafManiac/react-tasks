@@ -9,6 +9,7 @@ import Tasks from './components/Tasks.jsx';
 import AddTask from './components/AddTask.jsx';
 
 import './App.css';
+let API_KEY = ''; // your API KEY FOR iLab
 
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
     this.state = {
       tasks: []
     }
+    
   }
 
   componentWillMount() {
@@ -28,7 +30,7 @@ class App extends Component {
   getTasks() {
     axios.request({
       method: 'get',
-      url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks?apiKey=cxssGYdYHxJPJNWo9dR87IVu9OisXJ3t'
+      url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks?apiKey='+API_KEY
     }).then(response => {
       this.setState({
         tasks: response.data
@@ -42,7 +44,7 @@ class App extends Component {
     
     axios.request({
       method: 'put',
-      url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/'+task._id.$oid+'?apiKey=cxssGYdYHxJPJNWo9dR87IVu9OisXJ3t',
+      url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/'+task._id.$oid+'?apiKey='+API_KEY,
       data: {
         text: task.text,
         completed: checked
@@ -67,7 +69,7 @@ class App extends Component {
   addTask(text) {
     axios.request({
       method: 'post',
-      url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/?apiKey=cxssGYdYHxJPJNWo9dR87IVu9OisXJ3t',
+      url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/?apiKey='+API_KEY,
       data: {
         text: text,
         completed: false
@@ -99,7 +101,7 @@ class App extends Component {
         tasks.splice(i, 1);
         axios.request({
           method: 'delete',
-          url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/'+id+'?apiKey=cxssGYdYHxJPJNWo9dR87IVu9OisXJ3t',
+          url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/'+id+'?apiKey='+API_KEY,
         }).then(response => {
           
         }).catch(error => {
@@ -123,7 +125,7 @@ class App extends Component {
         tasks.splice(i, 1);
         axios.request({
           method: 'delete',
-          url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/'+id+'?apiKey=cxssGYdYHxJPJNWo9dR87IVu9OisXJ3t',
+          url: 'https://api.mlab.com/api/1/databases/reacttasks/collections/tasks/'+id+'?apiKey='+API_KEY,
         }).then(response => {
           
         }).catch(error => {
